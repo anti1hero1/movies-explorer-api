@@ -9,8 +9,8 @@
 `npm run start` — запускает сервер   
 `npm run dev` — запускает сервер с hot-reload
 ## Ссылки на проект
-Проект по ссылке https://api.anti1hero.nomoredomainsicu.ru
+Проект по ссылке https://api.anti1hero1-diplom.nomoredomainsrocks.ru
 
-Адрес репозитория: https://github.com/anti1hero1/react-mesto-api-full-gha
+Адрес репозитория: https://github.com/anti1hero1/movies-explorer-api
 
-IP 51.250.1.33
+IP 158.160.117.148
