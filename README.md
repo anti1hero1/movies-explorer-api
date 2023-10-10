@@ -13,4 +13,4 @@
 
 Адрес репозитория: https://github.com/anti1hero1/movies-explorer-api
 
-IP 158.160.117.148
+IP 158.160.101.144
