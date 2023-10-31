@@ -1,12 +1,8 @@
 const { HTTP_STATUS_FORBIDDEN } = require('http2').constants;
 
-class NotFoundError extends Error {
+module.exports = class NotfoundError extends Error {
   constructor(message) {
     super(message);
     this.statusCode = HTTP_STATUS_FORBIDDEN;
   }
-}
-
-module.exports = NotFoundError;
-
-// 403;
+};

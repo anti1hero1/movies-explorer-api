@@ -3,7 +3,7 @@ const usersRouter = require('./users');
 const moviesRouter = require('./movies');
 const auth = require('../middlewares/auth');
 const signupRouter = require('./signup');
-const signinRouter = require('./signin');
+const signinRouter = require('./singnin');
 const NotFoundError = require('../errors/NotFoundError');
 
 router.use('/signup', signupRouter);
