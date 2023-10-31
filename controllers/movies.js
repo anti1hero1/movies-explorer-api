@@ -1,9 +1,9 @@
-const { HTTP_STATUS_CREATED, HTTP_STATUS_OK } = require('http2').constants;
+const { HTTP_STATUS_OK, HTTP_STATUS_CREATED } = require('http2').constants;
 const mongoose = require('mongoose');
 const Movie = require('../models/movie');
 const BadRequestError = require('../errors/BadRequestError');
-const ForbiddenError = require('../errors/ForbiddenError');
 const NotFoundError = require('../errors/NotFoundError');
+const ForbiddenError = require('../errors/ForbiddenError');
 
 module.exports.addMovie = (req, res, next) => {
   const {
@@ -33,9 +33,7 @@ module.exports.addMovie = (req, res, next) => {
     nameEN,
     owner: req.user._id,
   })
-    .then((card) => {
-      res.status(HTTP_STATUS_CREATED).send(card);
-    })
+    .then((card) => res.status(HTTP_STATUS_CREATED).send(card))
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
         next(new BadRequestError(err.message));
@@ -47,9 +45,7 @@ module.exports.addMovie = (req, res, next) => {
 
 module.exports.getMovies = (req, res, next) => {
   Movie.find({ owner: req.user._id })
-    .then((movies) => {
-      res.status(HTTP_STATUS_OK).send(movies);
-    })
+    .then((cards) => res.status(HTTP_STATUS_OK).send(cards))
     .catch(next);
 };
 
@@ -58,7 +54,7 @@ module.exports.deleteMovie = (req, res, next) => {
     .orFail()
     .then((card) => {
       if (!card.owner.equals(req.user._id)) {
-        throw new ForbiddenError('Карточка другого пользователя');
+        throw new ForbiddenError('Карточка другого пользовател');
       }
       Movie.deleteOne(card)
         .orFail()
@@ -67,9 +63,9 @@ module.exports.deleteMovie = (req, res, next) => {
         })
         .catch((err) => {
           if (err instanceof mongoose.Error.DocumentNotFoundError) {
-            next(new NotFoundError(`Карточка с _id: ${req.params.movieId} не найдена.`));
+            next(new NotFoundError(`Карточка с _id: ${req.params.cardId} не найдена.`));
           } else if (err instanceof mongoose.Error.CastError) {
-            next(new BadRequestError(`Некорректный _id карточки: ${req.params.movieId}`));
+            next(new BadRequestError(`Некорректный _id карточки: ${req.params.cardId}`));
           } else {
             next(err);
           }
@@ -77,7 +73,7 @@ module.exports.deleteMovie = (req, res, next) => {
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.DocumentNotFoundError) {
-        next(new NotFoundError(`Карточка с _id: ${req.params.movieId} не найдена.`));
+        next(new NotFoundError(`Карточка с _id: ${req.params.cardId} не найдена.`));
       } else {
         next(err);
       }

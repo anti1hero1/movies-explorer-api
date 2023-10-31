@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { httpRegex } = require('../utils/constants');
+const { urlRegex } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -14,11 +14,11 @@ const movieSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Поле должно быть заполнено'],
   },
-  year: {
+  description: {
     type: String,
     required: [true, 'Поле должно быть заполнено'],
   },
-  description: {
+  year: {
     type: String,
     required: [true, 'Поле должно быть заполнено'],
   },
@@ -27,7 +27,7 @@ const movieSchema = new mongoose.Schema({
     required: [true, 'Поле должно быть заполнено'],
     validate: {
       validator(url) {
-        return httpRegex.test(url);
+        return urlRegex.test(url);
       },
       message: 'Введите URL',
     },
@@ -37,7 +37,7 @@ const movieSchema = new mongoose.Schema({
     required: [true, 'Поле должно быть заполнено'],
     validate: {
       validator(url) {
-        return httpRegex.test(url);
+        return urlRegex.test(url);
       },
       message: 'Введите URL',
     },
@@ -47,7 +47,7 @@ const movieSchema = new mongoose.Schema({
     required: [true, 'Поле должно быть заполнено'],
     validate: {
       validator(url) {
-        return httpRegex.test(url);
+        return urlRegex.test(url);
       },
       message: 'Введите URL',
     },

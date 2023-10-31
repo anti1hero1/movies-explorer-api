@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
-const { httpRegex } = require('../utils/constants');
-
+const { urlRegex } = require('../utils/constants');
 const {
   addMovie, getMovies, deleteMovie,
 } = require('../controllers/movies');
@@ -21,9 +20,9 @@ router.post('/', celebrate({
     duration: Joi.number().required(),
     description: Joi.string().required(),
     year: Joi.string().required(),
-    image: Joi.string().required().pattern(httpRegex),
-    trailerLink: Joi.string().required().pattern(httpRegex),
-    thumbnail: Joi.string().required().pattern(httpRegex),
+    image: Joi.string().required().pattern(urlRegex),
+    trailerLink: Joi.string().required().pattern(urlRegex),
+    thumbnail: Joi.string().required().pattern(urlRegex),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
